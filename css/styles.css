@@ -1,0 +1,71 @@
+/* colorpara la cabecera y el pie - no va si usas la clase de bootstrap */
+.cabecera{
+  background-color: #d9fa69;
+}
+.bg-pie{
+  background-color: #d9fa69;
+}
+.formulario-email{
+  display:inline-block;
+}
+
+.formulario-password{
+  display: inline-block;
+}
+
+.olv {
+  display:inline-block;
+  color:grey;
+  text-decoration: underline;
+
+}
+.inicio{
+  margin-left: 1%;
+}
+
+.reg-index{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 15px;
+}
+.resgistro{
+  font-family: 'Roboto 900', sans-serif;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 0;
+
+}
+.notrotres {
+  font-family: 'Roboto 300', sans-serif;
+}
+
+.tit-nosotros{
+  font-family: 'Roboto 900', sans-serif;
+}
+.registro-espacio{
+  margin-right: 10px;
+}
+
+.logo-tit{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.titulo{
+  margin-left: 10px;
+}
+.pie-pag {
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  text-decoration: underline;
+  height: 55px;
+}
+.pie{
+  color: grey;
+}
