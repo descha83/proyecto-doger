@@ -1,4 +1,21 @@
 <!DOCTYPE html>
+<?php
+	// Incluimos el controlador del registro-login
+	// De esta manera tengo el scope a la funciones que necesito
+	require_once 'register-login-controller.php';
+	// Si no está logueda la persona la redirijo al login
+	if ( !isLogged() ) {
+		header('location: login.php');
+		exit;
+	}
+	$pageTitle = 'Profile';
+	// require_once 'partials/head.php';
+	$theUser = $_SESSION['userLoged'];
+?>
+	<!-- ?php require_once 'partials/navbar.php'; ?> -->
+
+
+<!-- ?php require_once 'partials/footer.php'; ?> -->
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
@@ -27,8 +44,9 @@
       </article>
       <article class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-xs-12 user ">
 
-          <h4 class="nombre-usuario">Nombre Usuario</h4>
-              <img width="20%" class="img-usuario"src="imagenes/perfil-usuario.png" alt="Foto de perfil">
+          <h4 class="nombre-usuario">Hola <?= $theUser['name']; ?></h4>
+
+              <img width="147px" height="147px" class="img-usuario"src="data/avatars/<?= $theUser['avatar']; ?>" alt="Foto de perfil">
 
       </article>
     </section>
@@ -46,6 +64,7 @@
    <a class="navbar-link" href="#">Mis fotos</a>
    <a class="navbar-link" href="#">Mis videos</a>
    <a class="navbar-link"href="#">Mapa</a>
+	 <a class="navbar-link" href="logout.php">Salir</a>
  </nav>
 
   <div class="col-xl-12 bg-naranja">
@@ -58,7 +77,7 @@
       <section class="col-xl-7 col-lg-7 col-md-7 col-sm-7 col-xs-7 comentarios">
         <article class="nombre-posteo"><p>Nuevo posteo</p></article>
 
-        <form class="nuevo-posteo" action="index.html" method="post">
+        <form class="nuevo-posteo" action="index.php" method="post">
 
           <button class="btn btn-info foto" type="button" name="button">Foto</button>
           <button class="btn btn-info video" type="button" name="button">Video</button>
@@ -146,7 +165,8 @@
   <div class="col-xl-12 bg-naranja">
     <br>
   </div>
-  <footer class="row bg-pie pie-perfil ">
+  <?php require_once "partials/footer.php";  ?>
+  <!-- <footer class="row bg-pie pie-perfil ">
 
     <section class= "col-xl-12 pie-pag">
       <a class="pie"href="#">Registrate</a>
@@ -155,7 +175,7 @@
       <a class="pie"href="#">Terminos y Condiciones</a>
     </section>
 
-  </footer>
+  </footer> -->
 </div>
 </div>
 

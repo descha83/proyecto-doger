@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
@@ -9,7 +9,9 @@
       @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,900');
     </style>
     <title>Preguntas Frecuentes</title>
-  </head>
+  </head> -->
+<?php require_once "partials/head.php";  ?>
+
   <body>
     <div class="content">
 
@@ -66,8 +68,8 @@
         <div class="col-xl-12 bg-white">
           <br>
         </div>
-
-        <footer class="row bg-pie ">
+<?php require_once "partials/footer.php";  ?>
+        <!-- <footer class="row bg-pie ">
 
           <section class= "col-xl-12 pie-pag">
             <a class="pie"href="#">Registrate</a>
@@ -76,7 +78,7 @@
             <a class="pie"href="#">Terminos y Condiciones</a>
           </section>
 
-        </footer>
+        </footer> -->
         <div class="col-xl-12 bg-white">
           <br>
         </div>

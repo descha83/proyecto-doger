@@ -1,5 +1,11 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
+<!-- <!DOCTYPE html> -->
+<?php
+require_once "register-login-controller.php";
+require_once "register.php";
+require_once "partials/head.php";
+
+ ?>
+<!-- <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -10,7 +16,8 @@
 </style>
     <title>Dogers</title>
 
-  </head>
+  </head> -->
+
   <body>
     <div class="content">
 
@@ -25,7 +32,7 @@
 
           <article class="col-xl-5 col-lg-6 col-md-5 col-sm-12 col-xs-12 form-login">
 
-            <form class="formulario-ingreso" action="index.html" method="post">
+            <form class="formulario-ingreso" action="login.php" method="post">
               <br>
               <h3 class="ingreso"> Ingresa a tu cuenta</h3>
               <div class="br">
@@ -36,16 +43,23 @@
             <div class="email-ingreso">
               <p>
               <label for="email"></label>
-              <input type="text" name="email" placeholder="Email">
+              <input type="text" name="email" placeholder="Email" required>
+              </p>
+            </div>
+            <div class="formulario-user">
+              <p>
+              <label for="user"></label>
+              <input type="text" name="user" placeholder="Nick"required>
               </p>
             </div>
             <div class="formulario-password">
               <p>
               <label for="password"></label>
-              <input type="text" name="password" placeholder="Contraseña">
+              <input type="password" name="password" placeholder="Contraseña" required>
               </p>
             </div>
-            <button class="btn btn-warning btn-sm bt-inicio " type="button" name="button">Iniciar sesion</button>
+            <input type="hidden" name="tipo" value="login">
+            <button class="btn btn-warning btn-sm bt-inicio " type="submit" name="button">Iniciar sesion</button>
             <a class="col-lg-7 olv" href=# >¿Olvidaste tu contraseña?</a>
             </form>
           </article>
@@ -105,33 +119,116 @@
           </article>
           <article class="col-xl-3 col-lg-3 reg-index">
             <h2 class="form-registro">REGISTRATE</h2>
-             <form class="registro" action="index.html" method="post">
+             <form class="registro" action="index.php" method="post" enctype="multipart/form-data">
                <p class="registro-espacio">
 
-                <label for="nombre"></label>
-                <input type="text" name="nombre" placeholder="Nombre">
+                <label for="name"></label>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Nombre Completo"
+                  class="form-control <?= isset($errorsInRegister['name']) ? 'is-invalid' : null ?>"
+                  value="<?= $name; ?>"
+                  required
+                >
+                <div class="invalid-feedback">
+                  <?= isset($errorsInRegister['name']) ? $errorsInRegister['name'] : null; ?>
+                </div>
                </p>
                <p class="registro-espacio">
-                <label for="apellido"></label>
-                <input type="text" name="apellido" placeholder="Apellido">
+                <label for="user"></label>
+
+                <input
+                  type="text"
+                  name="userName"
+                  placeholder="Nombre Usuario"
+                  class="form-control <?= isset($errorsInRegister['userName']) ? 'is-invalid' : null ?>"
+                  value="<?= $userName; ?>"
+                  required
+                >
+                <div class="invalid-feedback">
+                  <?= isset($errorsInRegister['userName']) ? $errorsInRegister['userName'] : null; ?>
+                </div>
                </p>
                <p class="registro-espacio">
                 <label for="email"></label>
-                <input type="text" name="email" placeholder="Email">
+                <input
+									type="text"
+									name="email"
+                  placeholder="Email"
+									class="form-control <?= isset($errorsInRegister['email']) ? 'is-invalid' : null ?>"
+									value="<?= $email; ?>"
+                  required
+								>
+								<div class="invalid-feedback">
+          				<?= isset($errorsInRegister['email']) ? $errorsInRegister['email'] : null; ?>
+        				</div>
+               </p>
+               <p class="registro-espacio">
+                <label for="avatar"></label>
+                <input
+                  type="file"
+                  name="avatar"
+                  class="form-control <?= isset($errorsInRegister['avatar']) ? 'is-invalid' : null; ?>"
+                  required
+                >
+                <label class=""></label>
+                <div class="invalid-feedback">
+                  <?= isset($errorsInRegister['avatar']) ? $errorsInRegister['avatar'] : null; ?>
+                </div>
                </p>
                <p class="registro-espacio">
                 <label for="password"></label>
-                <input type="text" name="password" placeholder="Password">
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Contraseña"
+                  class="form-control <?= isset($errorsInRegister['password']) ? 'is-invalid' : null ?>"
+                  required
+                >
+                <div class="invalid-feedback">
+                  <?= isset($errorsInRegister['password']) ? $errorsInRegister['password'] : null; ?>
+                </div>
                </p>
                <p class="registro-espacio">
-                <label for="tipo mascota"></label>
-                <input type="text" name="tipo mascota" placeholder="Tipo mascota">
+                <label for="rePassword"></label>
+                <input
+									type="password"
+									name="rePassword"
+                  placeholder="Repetir contraseña"
+									class="form-control <?= isset($errorsInRegister['rePassword']) ? 'is-invalid' : null; ?>"
+                  required
+								>
+								<div class="invalid-feedback">
+          				<?= isset($errorsInRegister['rePassword']) ? $errorsInRegister['rePassword'] : null; ?>
+        				</div>
                </p>
                <p class="registro-espacio">
-                <label for="nombre de tu mascota"></label>
-                <input type="text" name="nombre de tu mascota" placeholder="Nombre de tu mascota">
-               </p>
-             <button class="btn btn-warning btn-xl bt-registro" type="button" name="button">Iniciar sesion</button>
+
+                 <div class="form-group">
+								<label><b>País de nacimiento:</b></label>
+								<select
+									name="country"
+									class="form-control <?= isset($errorsInRegister['country']) ? 'is-invalid' : null; ?>"
+								>
+									<option value="">Elegí un país</option>
+									<?php foreach ($countries as $code => $country): ?>
+										<option
+											value="<?= $code ?>"
+											<?= $code == $countryFromPost ? 'selected' : null; ?>>
+
+											<?= $country ?>
+										</option>
+									<?php endforeach; ?>
+								</select>
+								<div class="invalid-feedback">
+          				<?= isset($errorsInRegister['country']) ? $errorsInRegister['country'] : null; ?>
+        				</div>
+							</div>
+            </p>
+
+            <input type="hidden" name="tipo" value="register">
+             <button class="btn btn-warning btn-xl bt-registro" type="submit" name="button">Registrate</button>
 </form>
           </article>
         </section>
@@ -152,8 +249,9 @@
         <div class="col-xl-12 bg-white">
           <br>
         </div>
+<?php require_once "partials/footer.php";  ?>
 
-        <footer class="row bg-pie ">
+        <!-- <footer class="row bg-pie ">
 
           <section class= "col-xl-12 pie-pag">
             <a class="pie"href="#">Registrate</a>
@@ -162,7 +260,7 @@
             <a class="pie"href="#">Terminos y Condiciones</a>
           </section>
 
-        </footer>
+        </footer> -->
         <div class="col-xl-12 bg-white">
           <br>
         </div>
