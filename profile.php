@@ -59,11 +59,11 @@
 
  <div class="cuerpo">
  <nav class="navbar-text pull-right  col-xl-12 main-nav">
-   <a class="navbar-link" href="#">Inicio</a>
+   <a class="navbar-link" href="#">Perfil</a>
    <a class="navbar-link" href="#">Archivo</a>
    <a class="navbar-link" href="#">Mis fotos</a>
    <a class="navbar-link" href="#">Mis videos</a>
-   <a class="navbar-link"href="#">Mapa</a>
+   <a class="navbar-link"href="edit-user.php">Editar perfil</a>
 	 <a class="navbar-link" href="logout.php">Salir</a>
  </nav>
 

@@ -251,7 +251,7 @@ if (!isset($emailUserName)) {
             </p>
 
             <input type="hidden" name="tipo" value="register">
-             <button class="btn btn-warning btn-xl bt-registro" type="submit" name="button">Registrate</button>
+             <button class="btn btn-warning btn-xl bt-registro" type="submit" >Registrate</button>
 </form>
           </article>
         </section>
