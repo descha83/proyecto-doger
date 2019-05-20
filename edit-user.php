@@ -2,6 +2,7 @@
 require_once "register-login-controller.php";
 require_once "partials/head.php";
 
+
  	$userToLogin = getUserByEmail($_SESSION['userLoged']["email"]);
   $countries = [
 		'ar' => 'Argentina',
@@ -21,6 +22,7 @@ $userName = $userToLogin["userName"];
 $email = $userToLogin["email"];
 $avatar = $userToLogin["avatar"];
 $countryEdit = $userToLogin["country"];
+require_once "partials/header-profile.php"; 
  ?>
 
  <h2 class="form-registro">Editar mi perfil</h2>
