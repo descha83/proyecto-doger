@@ -33,9 +33,9 @@
 			// code...
 
 		// Las variables de persistencia les asigno el valor que vino de $_POST
-		// $name = trim($_POST['name']);
-		// $email = trim($_POST['email']);
-		// $userName = trim($_POST["userName"]);
+		$name = trim($_POST['name']);
+		$email = trim($_POST['email']);
+		$userName = trim($_POST["userName"]);
 		$countryFromPost = $_POST['country'];
 		// La función registerValidate() nos retorna el array de errores que almacenamos en esta variable
 		$errorsInRegister = registerValidate();

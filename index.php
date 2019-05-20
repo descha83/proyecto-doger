@@ -3,7 +3,9 @@
 require_once "register-login-controller.php";
 require_once "register.php";
 require_once "partials/head.php";
-
+if (!isset($emailUserName)) {
+  $emailUserName = "";
+}
  ?>
 <!-- <html lang="en" dir="ltr">
   <head>
@@ -43,24 +45,45 @@ require_once "partials/head.php";
             <div class="email-ingreso">
               <p>
               <label for="email"></label>
-              <input type="text" name="email" placeholder="Email" required>
+              <!--aca tengo al email o al usuario en emailUserName  -->
+              <input
+                type="text"
+                name="emailUserName"
+                placeholder="Email o Nombre de usuario"
+                class="form-control <?= isset($errorsInLogin['emailUserName']) ? 'is-invalid' : null ?>"
+                value="<?= $emailUserName; ?>"
+                required
+              >
+              <div class="invalid-feedback">
+                <?= isset($errorsInLogin['emailUserName']) ? $errorsInLogin['emailUserName'] : null; ?>
+              </div>
               </p>
             </div>
-            <div class="formulario-user">
-              <p>
-              <label for="user"></label>
-              <input type="text" name="user" placeholder="Nick"required>
-              </p>
-            </div>
+
             <div class="formulario-password">
               <p>
               <label for="password"></label>
-              <input type="password" name="password" placeholder="Contraseña" required>
+              <input
+                type="password"
+                name="password"
+                placeholder="Contraseña"
+                class="form-control <?= isset($errorsInLogin['password']) ? 'is-invalid' : null ?>"
+                required
+              >
+              <div class="invalid-feedback">
+                <?= isset($errorsInLogin['password']) ? $errorsInLogin['password'] : null; ?>
+              </div>
               </p>
             </div>
             <input type="hidden" name="tipo" value="login">
             <button class="btn btn-warning btn-sm bt-inicio " type="submit" name="button">Iniciar sesion</button>
             <a class="col-lg-7 olv" href=# >¿Olvidaste tu contraseña?</a>
+            <div class="form-check">
+								<label class="form-check-label">
+									<input class="form-check-input" type="checkbox" name="rememberUser">
+									Recordarme
+							  </label>
+							</div>
             </form>
           </article>
         </section>

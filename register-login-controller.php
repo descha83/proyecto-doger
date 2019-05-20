@@ -46,6 +46,15 @@
 		if ( empty($password) ) {
 			$errors['password'] = 'El campo password es obligatorio';
 		}
+		elseif (strlen($password)<6) {
+		$errors["password"] = "La contraseña debe tener al menos 6 caracteres";
+			}
+			elseif (strpos($password," ")) {
+				$errors["password"] = "La contraseña no puede tener espacios";
+			}
+			elseif (!strpos($password,"DH")) {
+				$errors["password"] = "La contraseña debe incluir la sigla DH en mayuscula";
+			}
 		// Si está vació el campo: $rePassword
 		if ( empty($rePassword) ) {
 			$errors['rePassword'] = 'El campo repetir password es obligatorio';
@@ -149,7 +158,7 @@
 	// Función para saber si está logueado la/el usuaria/o
 	function isLogged() {
 		// El return devuelve true o false, según lo que retorne la función isset()
-		return isset($_SESSION['userLoged']);
+	 	return isset($_SESSION['userLoged']);
 	}
 	// Función para preguntar si el email existe
 	/*
@@ -168,6 +177,23 @@
 		// Si termino de recorrer el array y no se encontró al email que pasé como parámetro
 		return false;
 	}
+	// Función para preguntar si el user name existe
+	/*
+		Recibe como parámetro el userName a buscar
+	*/
+	function userNameExist($userName) {
+		// Traigo a todos los usuarios
+		$allUsers = getAllUsers();
+		// Recorro el array de usuarios
+		foreach ($allUsers as $oneUser) {
+			// Si la posición "userName" del usuario en la iteración coincide con el email que pasé como parámetro
+			if ($oneUser['userName'] == $userName) {
+				return true;
+			}
+		}
+		// Si termino de recorrer el array y no se encontró al email que pasé como parámetro
+		return false;
+	}
 	// Función para validar el login
 	/*
 		No le pasamos parámetros pues usamos la variables super global $_POST
@@ -176,19 +202,17 @@
 		// Genero el array local de errores que retornaré al final
 		$errors = [];
 		// Trimeo los campos que recibo por $_POST
-		$email = trim($_POST['email']);
+		$emailUserName = trim($_POST['emailUserName']);
 		$password = trim($_POST['password']);
-		// Si está vacío el campo: $email
-		if ( empty($email) ) {
-			$errors['email'] = 'El campo email es obligatorio';
-		} elseif ( !filter_var($email, FILTER_VALIDATE_EMAIL) ) { // Si el campo $email no es un email válido
-			$errors['email'] = 'Introducí un formato de email válido';
-		} elseif ( !emailExist($email) ) { // Si no existe el email
-			// $errors['email'] = 'Ese correo no está registrado en nuestra base de datos';
-			$errors['email'] = 'Las credenciales no coinciden';
+		// Si está vacío el campo: $emailUserName
+		if ( empty($emailUserName) ) {
+			$errors['emailUserName'] = 'El campo es obligatorio';
+		} elseif ( !emailExist($emailUserName) && !userNameExist($emailUserName) ) { // Si no existe el email o el usuario
+			// $errors['emailUserName'] = 'Ese correo o este usuario no está registrado en nuestra base de datos';
+			$errors['emailUserName'] = 'Las credenciales no coinciden';
 		} else {
-			// Si pasamos las 3 validaciones anteriores, busco y  obtengo al usuario con el email que llegó por $_POST
-			$theUser = getUserByEmail($email);
+			// Si el usuario o el usuario que pasaron corresponden, busco y  obtengo al usuario con el email que llegó por $_POST
+			$theUser = getUserByEmail($emailUserName);
 			// Si el password que recibí por $_POST NO coincide con el password hasheado que está guardado en el usuario
 			if ( !password_verify($password, $theUser['password']) ) {
 				$errors['password'] = 'Las credenciales no coinciden';
@@ -205,13 +229,13 @@
 	/*
 		Recibe como parámetro el email que quiero buscar
 	*/
-	function getUserByEmail($email){
+	function getUserByEmail($emailUserName){
 		// Obtengo a todos los usuarios
 		$allUsers = getAllUsers();
 		// Recorro el array de usuarios
 		foreach ($allUsers as $oneUser) {
 			// Si la posición email del usuario de esa iteración es igual al email que me pasan por parámetro
-			if ($oneUser['email'] == $email) {
+			if ($oneUser['email'] == $emailUserName or $oneUser['userName'] == $emailUserName) {
 				// Retorno al usuario encontrado
 				return $oneUser;
 			}
