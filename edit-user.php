@@ -1,28 +1,22 @@
 <?php
-require_once "register-login-controller.php";
+require_once "edit.php";
 require_once "partials/head.php";
 
 
- 	$userToLogin = getUserByEmail($_SESSION['userLoged']["email"]);
-  $countries = [
-		'ar' => 'Argentina',
-		'bo' => 'Bolivia',
-		'br' => 'Brasil',
-		'co' => 'Colombia',
-		'cl' => 'Chile',
-		'ec' => 'Ecuador',
-		'pa' => 'Paraguay',
-		'pe' => 'Perú',
-		'uy' => 'Uruguay',
-		've' => 'Venezuela',
-	];
+ 	$userToEdit = getUserByEmail($_SESSION['userLoged']["email"]);
 
-$name = $userToLogin["name"];
-$userName = $userToLogin["userName"];
-$email = $userToLogin["email"];
-$avatar = $userToLogin["avatar"];
-$countryEdit = $userToLogin["country"];
-require_once "partials/header-profile.php"; 
+if (!$_POST) {
+  $name = $userToEdit["name"];
+  $userName = $userToEdit["userName"];
+  $email = $userToEdit["email"];
+  $avatar = $userToEdit["avatar"];
+  $countryEdit = $userToEdit["country"];
+
+}
+
+
+
+require_once "partials/header-profile.php";
  ?>
 
  <h2 class="form-registro">Editar mi perfil</h2>
@@ -34,12 +28,12 @@ require_once "partials/header-profile.php";
        type="text"
        name="name"
        placeholder="Nombre Completo"
-       class="form-control <?= isset($errorsInRegister['name']) ? 'is-invalid' : null ?>"
+       class="form-control <?= isset($errorsInEdit['name']) ? 'is-invalid' : null ?>"
        value="<?= $name; ?>"
        required
      >
      <div class="invalid-feedback">
-       <?= isset($errorsInRegister['name']) ? $errorsInRegister['name'] : null; ?>
+       <?= isset($errorsInEdit['name']) ? $errorsInEdit['name'] : null; ?>
      </div>
     </p>
     <p class="registro-espacio">
@@ -49,12 +43,12 @@ require_once "partials/header-profile.php";
        type="text"
        name="userName"
        placeholder="Nombre Usuario"
-       class="form-control <?= isset($errorsInRegister['userName']) ? 'is-invalid' : null ?>"
+       class="form-control <?= isset($errorsInEdit['userName']) ? 'is-invalid' : null ?>"
        value="<?= $userName; ?>"
        required
      >
      <div class="invalid-feedback">
-       <?= isset($errorsInRegister['userName']) ? $errorsInRegister['userName'] : null; ?>
+       <?= isset($errorsInEdit['userName']) ? $errorsInEdit['userName'] : null; ?>
      </div>
     </p>
     <p class="registro-espacio">
@@ -63,12 +57,12 @@ require_once "partials/header-profile.php";
        type="text"
        name="email"
        placeholder="Email"
-       class="form-control <?= isset($errorsInRegister['email']) ? 'is-invalid' : null ?>"
+       class="form-control <?= isset($errorsInEdit['email']) ? 'is-invalid' : null ?>"
        value="<?= $email; ?>"
        required
      >
      <div class="invalid-feedback">
-       <?= isset($errorsInRegister['email']) ? $errorsInRegister['email'] : null; ?>
+       <?= isset($errorsInEdit['email']) ? $errorsInEdit['email'] : null; ?>
      </div>
     </p>
     <p class="registro-espacio">
@@ -76,12 +70,12 @@ require_once "partials/header-profile.php";
      <input
        type="file"
        name="avatar"
-       class="form-control <?= isset($errorsInRegister['avatar']) ? 'is-invalid' : null; ?>"
+       class="form-control <?= isset($errorsInEdit['avatar']) ? 'is-invalid' : null; ?>"
        required
      >
      <label class=""></label>
      <div class="invalid-feedback">
-       <?= isset($errorsInRegister['avatar']) ? $errorsInRegister['avatar'] : null; ?>
+       <?= isset($errorsInEdit['avatar']) ? $errorsInEdit['avatar'] : null; ?>
      </div>
     </p>
 
@@ -89,7 +83,7 @@ require_once "partials/header-profile.php";
      <label><b>País de nacimiento:</b></label>
      <select
        name="country"
-       class="form-control <?= isset($errorsInRegister['country']) ? 'is-invalid' : null; ?>"
+       class="form-control <?= isset($errorsInEdit['country']) ? 'is-invalid' : null; ?>"
      >
        <option value="">Elegí un país</option>
        <?php foreach ($countries as $code => $country): ?>
@@ -103,7 +97,7 @@ require_once "partials/header-profile.php";
      </select>
 
      <div class="invalid-feedback">
-       <?= isset($errorsInRegister['country']) ? $errorsInRegister['country'] : null; ?>
+       <?= isset($errorsInEdit['country']) ? $errorsInEdit['country'] : null; ?>
      </div>
    </div>
  </p>
@@ -113,4 +107,6 @@ require_once "partials/header-profile.php";
 </form>
 <?php
 require_once "partials/footer.php";
+
+
  ?>

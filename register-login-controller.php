@@ -168,12 +168,16 @@
 		// Traigo a todos los usuarios
 		$allUsers = getAllUsers();
 		// Recorro el array de usuarios
-		foreach ($allUsers as $oneUser) {
-			// Si la posición "email" del usuario en la iteración coincide con el email que pasé como parámetro
-			if ($oneUser['email'] == $email) {
-				return true;
+		if ($allUsers) {
+			foreach ($allUsers as $oneUser) {
+				// Si la posición "email" del usuario en la iteración coincide con el email que pasé como parámetro
+				if ($oneUser['email'] == $email) {
+					return true;
+				}
 			}
+			// code...
 		}
+
 		// Si termino de recorrer el array y no se encontró al email que pasé como parámetro
 		return false;
 	}
@@ -240,6 +244,72 @@
 				return $oneUser;
 			}
 		}
+	}
+	function editValidate(){
+		// Defino el array local de errores que voy a retornar
+		$errors = [];
+		// Definimos las variables locales que almacenan lo que nos llegó por $_POST y $_FILES
+		$name = trim($_POST['name']);
+		$userName = trim($_POST["userName"]);
+		$email = trim($_POST['email']);
+		$country = $_POST['country'];
+		$avatar = $_FILES['avatar'];
+		// Si está vació el campo: $name
+		if ( empty($name) ) {
+			$errors['name'] = 'El campo nombre no puede estar vacío';
+		}
+		// Si está vació el campo: $email
+		if ( empty($email) ) {
+			$errors['email'] = 'El campo email es obligatorio';
+		} elseif ( !filter_var($email, FILTER_VALIDATE_EMAIL) ) { // Si el campo $email NO es un formato de email válido
+			$errors['email'] = 'Introducí un formato de email válido';
+		} elseif ( emailExist($email)  ) { // Si el email ya existe, es porque alguien ya se registró con el mismo
+			if ($email != $_SESSION['userLoged']["email"]) {
+
+			$errors['email'] = 'Ese correo ya está registrado';
+		}
+		}
+		if ( empty($userName) ) {
+			$errors['userName'] = 'El campo nombre no puede estar vacío';
+		}
+
+		// Si está vació el campo: $country
+		if ( empty($country) ) {
+			$errors['country'] = 'Elegí un país';
+		}
+		// Si no cargaron ningún archivo
+		if ( $avatar['error'] != UPLOAD_ERR_OK ) {
+			$errors['avatar'] = 'Subí una imagen';
+		} else {
+			// Si cargaron algún archivo, obtengo su extensión
+			$ext = pathinfo($avatar['name'], PATHINFO_EXTENSION);
+			// Si la extesión del archivo que cargaron NO está en mi array de formatos permitidos
+			if ( !in_array($ext, ALLOWED_IMAGE_FORMATS) ) {
+				$errors['avatar'] = 'Los formatos permitidos son JPG, PNG y GIF';
+			}
+		}
+		// Finalmente retornamos el array de errores
+		return $errors;
+	}
+	function editUser() {
+		// Trimeamos los valores que vinieron por $_POST
+		$_POST['name'] = trim($_POST['name']);
+		$_POST['useName'] = trim($_POST['userName']);
+		$_POST['email'] = trim($_POST['email']);
+
+		// Genero el ID igual al id en sesion
+		$_POST['id'] = $_SESSION["userLoged"]["id"];
+
+		// En la variable $finalUser guardo el array de $_POST
+		$finalUser = $_POST;
+		// Obtengo todos los usuarios
+		$allUsers = getAllUsers();
+		// En la última posición del array de usuarios, inserto al usuario nuevo
+		$allUsers[$_POST["id"]-1] = $finalUser;
+		// Guardo todos los usuarios de vuelta en el JSON
+		file_put_contents(USERS_JSON_PATH, json_encode($allUsers));
+		// Retorno al usuario que acabo de guardar para poder tenerlo listo y loguearlo
+		return $finalUser;
 	}
 	// Función para hacer debug
 	/*
