@@ -12,6 +12,7 @@
 	// Persistimos el email o el usuario
 	$emailUserName = '';
 	if ($_POST) {
+		// hacemos este if para que con el input hidden que pusimos nos traiga al formulario de login 
 		if ($_POST["tipo"]=="login") {
 			// code...
 

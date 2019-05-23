@@ -42,6 +42,7 @@
 		// Si no hay errores en el registro
 		// Cuando no hay errores guardo la imagen y los datos
 		// if ( count($errorsInRegister) == 0 ) {
+		
 		if ( !$errorsInRegister ) {
 			// Guardo la imagen y obtengo el nombre aleatorio creado
 			$imgName = saveImage();

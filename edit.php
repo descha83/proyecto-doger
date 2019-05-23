@@ -1,9 +1,9 @@
 <?php
-	// Incluimos el controlador del registro-login
+
 	// De esta manera tengo el scope a la funciones que necesito
 	require_once 'register-login-controller.php';
 
-	// require_once 'partials/head.php';
+	// cargo el array de paises para que me aparezca en el combo de edicion;
 	$countries = [
 		'ar' => 'Argentina',
 		'bo' => 'Bolivia',
@@ -16,12 +16,13 @@
 		'uy' => 'Uruguay',
 		've' => 'Venezuela',
 	];
+	// copiamos el register y cambiamos lo que corresponde
 	// Creamos esta variable con Array vacío para que no de error al entrar por GET
 	$errorsInEdit = [];
-	// Variables para persitir
 
+// si venimos por post toma los valores de las variables y las trimea
 	if ($_POST) {
-		if ($_POST['tipo'] == "register") {
+		{
 			// code...
 
 		// Las variables de persistencia les asigno el valor que vino de $_POST
@@ -39,10 +40,10 @@
 			$imgName = saveImage();
 			// Creo en $_POST una posición "avatar" para guardar el nombre de la imagen
 			$_POST['avatar'] = $imgName;
-			// Guardo al usuario en el archivo JSON, y me devuelve al usuario que guardó en array
+			// piso al usuario en el archivo JSON, y me devuelve al usuario editado
 			$theUser = editUser();
-		
-			// Logueo al usuario
+
+			// graba $theUser en la sesion y lo envia a profile
 			login($theUser);
 		}
 	}

@@ -2,9 +2,9 @@
 require_once "edit.php";
 require_once "partials/head.php";
 
-
+// uso la funcion getUserByEmail con el email del usuario logueado en sesion
  	$userToEdit = getUserByEmail($_SESSION['userLoged']["email"]);
-
+// siempre que la informacion no venga por post y guardo los valores que vienen en las siguentes variables
 if (!$_POST) {
   $name = $userToEdit["name"];
   $userName = $userToEdit["userName"];
@@ -18,7 +18,7 @@ if (!$_POST) {
 
 require_once "partials/header-profile.php";
  ?>
-
+<!-- desarrollo el mismo form que use para registro con la variable de errores  -->
  <h2 class="form-registro">Editar mi perfil</h2>
   <form class="registro" action="edit-user.php" method="post" enctype="multipart/form-data">
     <p class="registro-espacio">
@@ -102,7 +102,6 @@ require_once "partials/header-profile.php";
    </div>
  </p>
 
- <input type="hidden" name="tipo" value="register">
   <button class="btn btn-warning btn-xl bt-registro" type="submit" >Guardar cambios</button>
 </form>
 <?php

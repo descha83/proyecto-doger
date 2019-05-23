@@ -142,7 +142,7 @@ if (!isset($emailUserName)) {
           </article>
           <article class="col-xl-3 col-lg-3 reg-index">
             <h2 class="form-registro">REGISTRATE</h2>
-             <form class="registro" action="index.php" method="post" enctype="multipart/form-data">
+             <form class="registro" action="index.php" method="post" enctype="multipart/form-data" >
                <p class="registro-espacio">
 
                 <label for="name"></label>

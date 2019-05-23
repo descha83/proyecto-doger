@@ -41,6 +41,8 @@
 		}
 		if ( empty($userName) ) {
 			$errors['userName'] = 'El campo nombre no puede estar vacío';
+		}elseif ( userNameExist($userName) ) { // Si el email ya existe, es porque alguien ya se registró con el mismo
+			$errors['userName'] = 'Ese nombre de usuario ya está registrado';
 		}
 		// Si está vació el campo: $password
 		if ( empty($password) ) {
@@ -52,7 +54,7 @@
 			elseif (strpos($password," ")) {
 				$errors["password"] = "La contraseña no puede tener espacios";
 			}
-			elseif (!strpos($password,"DH")) {
+			elseif ( count(explode("DH", $password)) == 1 ) {
 				$errors["password"] = "La contraseña debe incluir la sigla DH en mayuscula";
 			}
 		// Si está vació el campo: $rePassword
@@ -168,6 +170,7 @@
 		// Traigo a todos los usuarios
 		$allUsers = getAllUsers();
 		// Recorro el array de usuarios
+
 		if ($allUsers) {
 			foreach ($allUsers as $oneUser) {
 				// Si la posición "email" del usuario en la iteración coincide con el email que pasé como parámetro
@@ -188,16 +191,22 @@
 	function userNameExist($userName) {
 		// Traigo a todos los usuarios
 		$allUsers = getAllUsers();
-		// Recorro el array de usuarios
-		foreach ($allUsers as $oneUser) {
+		// Recorro el array de usuariosif
+		if ($allUsers) {
+			// code...
+			foreach ($allUsers as $oneUser) {
 			// Si la posición "userName" del usuario en la iteración coincide con el email que pasé como parámetro
 			if ($oneUser['userName'] == $userName) {
 				return true;
 			}
-		}
+				}
+}
 		// Si termino de recorrer el array y no se encontró al email que pasé como parámetro
 		return false;
-	}
+
+
+}
+
 	// Función para validar el login
 	/*
 		No le pasamos parámetros pues usamos la variables super global $_POST
@@ -213,7 +222,7 @@
 			$errors['emailUserName'] = 'El campo es obligatorio';
 		} elseif ( !emailExist($emailUserName) && !userNameExist($emailUserName) ) { // Si no existe el email o el usuario
 			// $errors['emailUserName'] = 'Ese correo o este usuario no está registrado en nuestra base de datos';
-			$errors['emailUserName'] = 'Las credenciales no coinciden';
+			$errors['emailUserName'] = 'El usuario no está registrado';
 		} else {
 			// Si el usuario o el usuario que pasaron corresponden, busco y  obtengo al usuario con el email que llegó por $_POST
 			$theUser = getUserByEmail($emailUserName);
@@ -236,6 +245,7 @@
 	function getUserByEmail($emailUserName){
 		// Obtengo a todos los usuarios
 		$allUsers = getAllUsers();
+
 		// Recorro el array de usuarios
 		foreach ($allUsers as $oneUser) {
 			// Si la posición email del usuario de esa iteración es igual al email que me pasan por parámetro
@@ -245,6 +255,7 @@
 			}
 		}
 	}
+	// valido el formulario de edicion de perfil --- copio de registerValidate
 	function editValidate(){
 		// Defino el array local de errores que voy a retornar
 		$errors = [];
@@ -263,16 +274,24 @@
 			$errors['email'] = 'El campo email es obligatorio';
 		} elseif ( !filter_var($email, FILTER_VALIDATE_EMAIL) ) { // Si el campo $email NO es un formato de email válido
 			$errors['email'] = 'Introducí un formato de email válido';
-		} elseif ( emailExist($email)  ) { // Si el email ya existe, es porque alguien ya se registró con el mismo
+		} elseif ( emailExist($email)  ) { // Si el email ya existe, es porque alguien ya se registró con el mismo y
+// si al editar el mail el nuevo mail es distinto del mail que el usuario en sesion tiene entonces
 			if ($email != $_SESSION['userLoged']["email"]) {
 
 			$errors['email'] = 'Ese correo ya está registrado';
 		}
 		}
 		if ( empty($userName) ) {
+
 			$errors['userName'] = 'El campo nombre no puede estar vacío';
 		}
+		elseif ( userNameExist($userName)  ) { // Si el email ya existe, es porque alguien ya se registró con el mismo y
+	 // si al editar el mail el nuevo mail es distinto del mail que el usuario en sesion tiene entonces
+	 	if ($userName != $_SESSION['userLoged']["userName"]) {
 
+	 	$errors['userName'] = 'Ese nombre de usuario ya está registrado';
+	 }
+	 }
 		// Si está vació el campo: $country
 		if ( empty($country) ) {
 			$errors['country'] = 'Elegí un país';
@@ -291,24 +310,26 @@
 		// Finalmente retornamos el array de errores
 		return $errors;
 	}
+
+	// funcion para editar usuario , copio saveUser
 	function editUser() {
-		// Trimeamos los valores que vinieron por $_POST
+		// Trimeamos los valores que vinieron por $_POST de los campos editables
 		$_POST['name'] = trim($_POST['name']);
 		$_POST['useName'] = trim($_POST['userName']);
 		$_POST['email'] = trim($_POST['email']);
 
-		// Genero el ID igual al id en sesion
-		$_POST['id'] = $_SESSION["userLoged"]["id"];
+		// Genero el ID igual al id del usuario logueado en sesion
+				$_POST['id'] = $_SESSION["userLoged"]["id"];
 
 		// En la variable $finalUser guardo el array de $_POST
 		$finalUser = $_POST;
 		// Obtengo todos los usuarios
 		$allUsers = getAllUsers();
-		// En la última posición del array de usuarios, inserto al usuario nuevo
+		// la posicion del array de usuarios, inserto al usuario nuevo( la posicion la tomo de id-1 ya que id era = a la posicion +1)
 		$allUsers[$_POST["id"]-1] = $finalUser;
 		// Guardo todos los usuarios de vuelta en el JSON
 		file_put_contents(USERS_JSON_PATH, json_encode($allUsers));
-		// Retorno al usuario que acabo de guardar para poder tenerlo listo y loguearlo
+		// Retorno al usuario que acabo de guardar para poder tenerlo listo
 		return $finalUser;
 	}
 	// Función para hacer debug
