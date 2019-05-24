@@ -1,131 +1,262 @@
-<!DOCTYPE html>
 <?php
-	// Incluimos el controlador del registro-login
-	// De esta manera tengo el scope a la funciones que necesito
-	require_once 'register-login-controller.php';
-
-	// Si no está logueda la persona la redirijo al login
-	if ( !isLogged() ) {
-		header('location: login.php');
-		exit;
-	}
-	$pageTitle = 'Profile';
-	// require_once 'partials/head.php';
+	 require_once 'register-login-controller.php';
+   // Si no está logueda la persona la redirijo al login
+   // if ( !isLogged() ) {
+  	// 	header('location: login.php');
+  	// 	exit;
+   //  }
+      $pageTitle = 'Mi Perfil';
+  	   require_once 'partials/head.php';
+  	    $theUser = $_SESSION['userLoged'];
 
 ?>
-	<!-- ?php require_once 'partials/navbar.php'; ?> -->
 
+ <?php require_once 'partials/navbar.php'; ?>
 
-<!-- ?php require_once 'partials/footer.php'; ?> -->
-<?php 	require_once "partials/header-profile.php"; ?>
+<body>
+ <div class="container">
 
-  <div class="col-xl-12 cuerpo-medio">
-    <div class="row">
+   <div class="timeline">
+     <div class="timeline-cover">
 
-      <section class="col-xl-7 col-lg-7 col-md-7 col-sm-7 col-xs-7 comentarios">
-        <article class="nombre-posteo"><p>Nuevo posteo</p></article>
+       <!--Pantallas grandes-->
+       <div class="timeline-nav-bar hidden-sm hidden-xs">
+         <div class="row">
+           <div class="col-md-3">
+             <div class="profile-info">
+               <img src="data/avatars/<?= $theUser['avatar']; ?>" alt="imagen usuario" class="img-responsive profile-photo" />
+             </div>
+           </div>
+           <div class="col-md-3">
+             <ul class="list-inline">
+               <li><h3><?= $theUser['name']; ?></h3>
+               <p class="text-muted"><?= $theUser['email']; ?></p></li>
+             </ul>
+           </div>
+           <div class="col-md-6">
+             <ul class="list-inline profile-menu">
+               <li><a href="en-construccion.php">Biografía</a></li>
+               <li><a href="en-construccion.php">Información</a></li>
+               <li><a href="en-construccion.php">Fotos</a></li>
+               <li><a href="en-construccion.php">Amigos</a></li>
+							 <li><a href="edit-user.php">Editar perfil</a></li>
 
-        <form class="nuevo-posteo" action="index.php" method="post">
+             </ul>
+           </div>
+         </div>
+       </div><!--Pantallas grandes-->
 
-          <button class="btn btn-info foto" type="button" name="button">Foto</button>
-          <button class="btn btn-info video" type="button" name="button">Video</button>
-          <input class="ventana-posteo" type="text" name="" value="" placeholder="¿Que querés contarnos hoy?">
-          <button class="btn btn-info enviar" type="button" name="button">Enviar</button>
+       <!--Pantallas chicas-->
+       <div class="navbar-mobile hidden-lg hidden-md">
+         <div class="profile-info">
+           <img src="data/avatars/<?= $theUser['avatar']; ?>" alt="imagen usuario" class="img-responsive profile-photo" />
+           <h4><?= $theUser['name']; ?></h4>
+           <p class="text-muted"><?= $theUser['email']; ?></p>
+         </div>
+         <div class="mobile-menu">
+           <ul class="list-inline">
+             <li><a href="timline.html" class="active">Biografía</a></li>
+             <li><a href="timeline-about.html">Información</a></li>
+             <li><a href="timeline-album.html">Fotos</a></li>
+             <li><a href="timeline-friends.html">Amigos</a></li>
+           </ul>
+         </div>
+       </div><!--Pantallas chicas-->
 
-        </form>
-      </section>
+     </div>
+     <div id="page-contents">
+       <div class="row">
+         <div class="col-md-12">
 
-    <section class="col-xl-4 col-lg-4 col-md-4 offset-1 col-sm-4 col-xs-4 editar-perfil">
-     <article class="nombre-seccion"><p>Algo sobre mi </p></article>
-    <button class="btn btn-info btn-editar"type="button" name="button">Editar perfil</button>
-    <article class="presentacion">
-      <p class="mi-descrip">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-    </article>
-    </section>
+           <!-- Crear post
+           ================================================= -->
+           <div class="create-post">
+             <div class="row">
+               <div class="col-md-12 col-sm-12">
+                 <div class="form-group">
+                   <textarea name="texts" id="exampleTextarea" cols="300" rows="2" class="form-control" placeholder="¿Qué estás pensando?"></textarea>
+                 </div>
+               </div>
+               <div class="col-md-12 col-sm-12">
+                 <div class="tools">
+                   <ul class="publishing-tools list-inline">
+                     <li><a href="#"><i class="ion-compose"></i></a></li>
+                     <li><a href="#"><i class="ion-images"></i></a></li>
+                     <li><a href="#"><i class="ion-ios-videocam"></i></a></li>
+                     <li><a href="#"><i class="ion-map"></i></a></li>
+                   </ul>
+                   <button class="btn btn-primary pull-right">Publicar</button>
+                 </div>
+               </div>
+             </div>
+           </div><!-- Crear post fin-->
 
-
-    </div>
-
-      <div class="col-xl-12 bg-naranja">
-        <br>
       </div>
+       <div class="row">
+         <div class="col-md-3">
+         </div>
+         <div class="col-md-7">
 
-    <div class="row">
-    <section class="col-xl-7 col-lg-7 col-md-7 col-sm-8 col-xs-12 timeline">
-        <article class="nombre-public"><p>Nueva publicacion</p></article>
-      <section class="publicacion">
-        <img <img src="imagenes/perfil-usuario.png" width="30px" alt="contacto">>
-        <h6>Nombre usuario</h6>
-        <p>Fecha y hora</p>
-        <p>texto ejemplo, comentario o publicacion //Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde ...</p>
-      </section>
+           <!-- Post Content
+           ================================================= -->
+           <div class="post-content">
 
-      <section class="publicacion">
-        <img <img src="imagenes/perfil-usuario.png" width="30px" alt="contacto">>
-        <h6>Nombre usuario</h6>
-        <p>Fecha y hora</p>
-        <iframe width="100%" height="315" src="https://www.youtube.com/embed/CvixRV5DfXk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      </section>
+             <!--Fecha Post-->
+             <div class="post-date hidden-xs hidden-sm">
+               <h5><?= $theUser['name']; ?></h5>
+               <p class="text-grey">Hace un momento</p>
+             </div><!--Post Fin-->
 
-      <section class="publicacion">
-        <img <img src="imagenes/perfil-usuario.png" width="30px" alt="contacto">>
-        <h6>Nombre usuario</h6>
-        <p>Fecha y hora</p>
-        <p>texto ejemplo, comentario o publicacion //Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde ...</p>
-      </section>
+               <iframe width="100%" height="315" src="https://www.youtube.com/embed/CvixRV5DfXk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+             <div class="post-container">
+               <img src="images/users/user-1.jpg" alt="user" class="profile-photo-md pull-left" />
+               <div class="post-detail">
+                 <div class="user-info">
+                   <h5><a href="timeline.html" class="profile-link">Lorena Astudillo</a> <span class="following">siguiendo</span></h5>
+                   <p class="text-muted">Publicó hace 15 minutos</p>
+                 </div>
+                 <div class="reaction">
+                   <a class="btn text-green"><i class="icon ion-thumbsup"></i> 13</a>
+                   <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a>
+                 </div>
+                 <div class="line-divider"></div>
+                 <div class="post-text">
+                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i></p>
+                 </div>
+                 <div class="line-divider"></div>
+                 <div class="post-comment">
+                   <img src="images/users/user-11.jpg" alt="" class="profile-photo-sm" />
+                   <p><a href="#" class="profile-link">Diana </a><i class="em em-laughing"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
+                 </div>
+                 <div class="post-comment">
+                   <img src="images/users/user-4.jpg" alt="" class="profile-photo-sm" />
+                   <p><a href="#" class="profile-link">Juan</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
+                 </div>
+                 <div class="post-comment">
+                   <img src="data/avatars/<?= $theUser['avatar']; ?>" alt="imagen usuario" class="profile-photo-sm" />
+                   <input type="text" class="form-control" placeholder="Escribí tu comentario">
+                 </div>
+               </div>
+             </div>
+           </div>
 
-      <section class="publicacion">
-        <img <img src="imagenes/perfil-usuario.png" width="30px" alt="contacto">>
-        <h6>Nombre usuario</h6>
-        <p>Fecha y hora</p>
-        <img src="imagenes/dogers1.png" width="100%" alt="foto mascota">
-        <p>texto ejemplo, comentario o publicacion.</p>
-      </section>
+           <!-- COntenido Post
+           ================================================= -->
+           <div class="post-content">
 
-    </section>
+             <!--Fecha post-->
+             <div class="post-date hidden-xs hidden-sm">
+               <h5><?= $theUser['name']; ?></h5>
+               <p class="text-grey">10/22/2016</p>
+             </div><!--Fin fecha post-->
 
-    <section class="col-xl-4 col-lg-4 col-md-4 offset-1 col-sm-3 col-xs-12 contactos">
-      <article class="nombre-contactos"><p>Mis amigos</p></article>
-      <ul class="lista-contactos">
-        <li><img src="imagenes/perfil-usuario.png" width="30px" alt="contacto"> Nombre y apellido </li>
-        <br>
-        <li><img src="imagenes/perfil-usuario.png" width="30px" alt="contacto"> Nombre y apellido </li>
-        <br>
-        <li><img src="imagenes/perfil-usuario.png" width="30px" alt="contacto"> Nombre y apellido </li>
-        <br>
-        <li><img src="imagenes/perfil-usuario.png" width="30px" alt="contacto"> Nombre y apellido </li>
-        <br>
-        <li><img src="imagenes/perfil-usuario.png" width="30px" alt="contacto"> Nombre y apellido </li>
-        <br>
-        <li><img src="imagenes/perfil-usuario.png" width="30px" alt="contacto"> Nombre y apellido </li>
-        <br>
-        <li><img src="imagenes/perfil-usuario.png" width="30px" alt="contacto"> Nombre y apellido </li>
-        <br>
-        <li><img src="imagenes/perfil-usuario.png" width="30px" alt="contacto"> Nombre y apellido </li>
-        <br>
-        <li><img src="imagenes/perfil-usuario.png" width="30px" alt="contacto"> Nombre y apellido </li>
-        <br>
-        <li><img src="imagenes/perfil-usuario.png" width="30px" alt="contacto"> Nombre y apellido </li>
-      </ul>
-    </section>
-    </div>
-  </div>
-  <div class="col-xl-12 bg-naranja">
-    <br>
-  </div>
-  <?php require_once "partials/footer.php";  ?>
-  <!-- <footer class="row bg-pie pie-perfil ">
+             <img src="images/post-images/dogers1.png" alt="post-image" class="img-responsive post-image" />
+             <div class="post-container">
+               <img src="images/users/user-1.jpg" alt="user" class="profile-photo-md pull-left" />
+               <div class="post-detail">
+                 <div class="user-info">
+                   <h5><a href="timeline.html" class="profile-link">Sarah Cruz</a> <span class="following">Siguiendo</span></h5>
+                   <p class="text-muted">Ayer</p>
+                 </div>
+                 <div class="reaction">
+                   <a class="btn text-green"><i class="icon ion-thumbsup"></i> 49</a>
+                   <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a>
+                 </div>
+                 <div class="line-divider"></div>
+                 <div class="post-text">
+                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i></p>
+                 </div>
+                 <div class="line-divider"></div>
+                 <div class="post-comment">
+                   <img src="images/users/user-11.jpg" alt="" class="profile-photo-sm" />
+                   <p><a href="#" class="profile-link">Diana </a><i class="em em-laughing"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
+                 </div>
+                 <div class="post-comment">
+                   <img src="images/users/user-4.jpg" alt="" class="profile-photo-sm" />
+                   <p><a href="#" class="profile-link">Juan</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
+                 </div>
+                 <div class="post-comment">
+                    <img src="data/avatars/<?= $theUser['avatar']; ?>" alt="imagen usuario" class="profile-photo-sm" />
+                   <input type="text" class="form-control" placeholder="Escribí tu comentario">
+                 </div>
+               </div>
+             </div>
+           </div>
 
-    <section class= "col-xl-12 pie-pag">
-      <a class="pie"href="#">Registrate</a>
-      <a class="pie"href="#">Inicia Sesion</a>
-      <a class="pie"href="#">Preguntas Frecuentes</a>
-      <a class="pie"href="#">Terminos y Condiciones</a>
-    </section>
+           <!-- Contenido post
+           ================================================= -->
+           <div class="post-content">
 
-  </footer> -->
-</div>
-</div>
+             <!--Fecha post-->
+             <div class="post-date hidden-xs hidden-sm">
+               <h5><?= $theUser['name']; ?></h5>
+               <p class="text-grey">10/21/2016</p>
+             </div><!--Fecha post fin-->
 
-  </body>
-</html>
+             <div class="post-container">
+               <img src="images/users/user-1.jpg" alt="user" class="profile-photo-md pull-left" />
+               <div class="post-detail">
+                 <div class="user-info">
+                   <h5><a href="timeline.html" class="profile-link">Sarah Cruiz</a> <span class="following">Siguiendo</span></h5>
+                   <p class="text-muted">Hace 2 días</p>
+                 </div>
+                 <div class="reaction">
+                   <a class="btn text-green"><i class="icon ion-thumbsup"></i> 49</a>
+                   <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a>
+                 </div>
+                 <div class="line-divider"></div>
+                 <div class="post-text">
+                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i></p>
+                 </div>
+                 <div class="line-divider"></div>
+                 <div class="post-comment">
+                   <img src="images/users/user-11.jpg" alt="" class="profile-photo-sm" />
+                   <p><a href="#" class="profile-link">Diana </a><i class="em em-laughing"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
+                 </div>
+                 <div class="post-comment">
+                   <img src="images/users/user-4.jpg" alt="" class="profile-photo-sm" />
+                   <p><a href="#" class="profile-link">John</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
+                 </div>
+                 <div class="post-comment">
+                   <img src="data/avatars/<?= $theUser['avatar']; ?>" alt="imagen usuario" class="profile-photo-sm" />
+                   <input type="text" class="form-control" placeholder="Escribí tu comentario">
+                 </div>
+               </div>
+             </div>
+           </div>
+
+         </div>
+         <div class="col-md-2 static">
+           <div id="sticky-sidebar">
+             <h4 class="grey">Tu actividad</h4>
+             <div class="feed-item">
+               <div class="live-activity">
+                 <p><a href="#" class="profile-link"><?= $theUser['name']; ?></a> Comentaste una foto</p>
+                 <p class="text-muted">Hace 5 minutos</p>
+               </div>
+             </div>
+             <div class="feed-item">
+               <div class="live-activity">
+                 <p><a href="#" class="profile-link"><?= $theUser['name']; ?></a> Publicaste una foto</p>
+                 <p class="text-muted">Hace una hora</p>
+               </div>
+             </div>
+             <div class="feed-item">
+               <div class="live-activity">
+                 <p><a href="#" class="profile-link"><?= $theUser['name']; ?></a>Te gustó una publicación</p>
+                 <p class="text-muted">Hace 4 horas</p>
+               </div>
+             </div>
+             <div class="feed-item">
+               <div class="live-activity">
+                 <p><a href="#" class="profile-link"><?= $theUser['name']; ?></a> Compartiste un álbum</p>
+                 <p class="text-muted">Hace un día</p>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+ <?php require_once 'partials/footer.php'; ?>

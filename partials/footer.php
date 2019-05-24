@@ -1,11 +1,46 @@
+<!-- Footer
+================================================= -->
+<footer id="footer">
+  <div class="container">
+    <div class="row">
+      <div class="footer-wrapper">
+        <div class="col-md-7 col-sm-5">
+          <a href="index.php"><img src="images/logo-black.png" alt="logo" class="footer-logo" /></a>
+          <p>Dogers © 2019. Todos los derechos reservados</p>
+          <br>
+        </div>
+        <div class="col-md-1 col-sm-2">
+          <h6><a href="index.php">Registrarte</a></h6>
+        </div>
+        <div class="col-md-1 col-sm-2">
+          <h6><a href="login.php">Ingresar</a></h6>
+        </div>
+        <div class="col-md-1 col-sm-1">
+          <h6><a href="newsfeed.php">Inicio</a></h6>
+        </div>
+        <div class="col-md-1 col-sm-1">
+          <h6><a href="profile.php">Perfil</a></h6>
+        </div>
+        <div class="col-md-1 col-sm-1">
+          <h6><a href="preguntas-frecuentes.php">FAQ</a></h6>
+        </div>
+      </div>
 
-<footer class="row bg-pie ">
-
-  <section class= "col-xl-12 pie-pag">
-    <a class="pie"href="#">Registrate</a>
-    <a class="pie"href="#">Inicia Sesion</a>
-    <a class="pie"href="#">Preguntas Frecuentes</a>
-    <a class="pie"href="#">Terminos y Condiciones</a>
-  </section>
+  </div>
 
 </footer>
+
+<!--preloader-->
+<div id="spinner-wrapper">
+ <div class="spinner"></div>
+</div>
+
+<!-- Scripts
+================================================= -->
+<script src="js/jquery-3.1.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.sticky-kit.min.js"></script>
+<script src="js/jquery.scrollbar.min.js"></script>
+<script src="js/script.js"></script>
+ </body>
+</html>

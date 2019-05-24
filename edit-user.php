@@ -1,4 +1,5 @@
 <?php
+$pageTitle = "Editar usuario";
 require_once "edit.php";
 require_once "partials/head.php";
 
@@ -13,16 +14,19 @@ if (!$_POST) {
   $countryEdit = $userToEdit["country"];
 
 }
-
-
-
-require_once "partials/header-profile.php";
+require_once "partials/navbar.php";
  ?>
 <!-- desarrollo el mismo form que use para registro con la variable de errores  -->
+<div class="container">
+
+ <div class="timeline-nav-bar hidden-sm hidden-xs">
+
  <h2 class="form-registro">Editar mi perfil</h2>
   <form class="registro" action="edit-user.php" method="post" enctype="multipart/form-data">
     <p class="registro-espacio">
-
+      <br>
+      <br>
+      <br>
      <label for="name"></label>
      <input
        type="text"
@@ -77,6 +81,7 @@ require_once "partials/header-profile.php";
      <div class="invalid-feedback">
        <?= isset($errorsInEdit['avatar']) ? $errorsInEdit['avatar'] : null; ?>
      </div>
+
     </p>
 
       <div class="form-group">
@@ -104,6 +109,8 @@ require_once "partials/header-profile.php";
 
   <button class="btn btn-warning btn-xl bt-registro" type="submit" >Guardar cambios</button>
 </form>
+</div>
+</div>
 <?php
 require_once "partials/footer.php";
 

@@ -61,8 +61,8 @@
 		if ( empty($rePassword) ) {
 			$errors['rePassword'] = 'El campo repetir password es obligatorio';
 		} elseif ($password != $rePassword) { // Si el valor de los campos $password y $rePassword son distintos
-			$errors['password'] = 'Las contraseñas no coinciden';
-			$errors['rePassword'] = 'Las contraseñas no coinciden';
+			$errors['password'] = 'Las credenciales no coinciden';
+			$errors['rePassword'] = 'Las credenciales no coinciden';
 		}
 		// Si está vació el campo: $country
 		if ( empty($country) ) {
@@ -315,17 +315,18 @@
 	function editUser() {
 		// Trimeamos los valores que vinieron por $_POST de los campos editables
 		$_POST['name'] = trim($_POST['name']);
-		$_POST['useName'] = trim($_POST['userName']);
+		$_POST['userName'] = trim($_POST['userName']);
 		$_POST['email'] = trim($_POST['email']);
 
 		// Genero el ID igual al id del usuario logueado en sesion
-				$_POST['id'] = $_SESSION["userLoged"]["id"];
+		$_POST['id'] = $_SESSION["userLoged"]["id"];
 
 		// En la variable $finalUser guardo el array de $_POST
 		$finalUser = $_POST;
 		// Obtengo todos los usuarios
 		$allUsers = getAllUsers();
 		// la posicion del array de usuarios, inserto al usuario nuevo( la posicion la tomo de id-1 ya que id era = a la posicion +1)
+		$finalUser['password'] = $allUsers[$_POST["id"]-1]['password'];
 		$allUsers[$_POST["id"]-1] = $finalUser;
 		// Guardo todos los usuarios de vuelta en el JSON
 		file_put_contents(USERS_JSON_PATH, json_encode($allUsers));

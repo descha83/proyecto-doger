@@ -29,7 +29,7 @@
 	$userName ="";
 	$countryFromPost = '';
 	if ($_POST) {
-		if ($_POST['tipo'] == "register") {
+		// if ($_POST['tipo'] == "register") {
 			// code...
 
 		// Las variables de persistencia les asigno el valor que vino de $_POST
@@ -42,7 +42,7 @@
 		// Si no hay errores en el registro
 		// Cuando no hay errores guardo la imagen y los datos
 		// if ( count($errorsInRegister) == 0 ) {
-		
+
 		if ( !$errorsInRegister ) {
 			// Guardo la imagen y obtengo el nombre aleatorio creado
 			$imgName = saveImage();
@@ -56,7 +56,7 @@
 			login($theUser);
 		}
 	}
-	}
+
 	// require_once 'partials/navbar.php';
 ?>
 

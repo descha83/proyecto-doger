@@ -1,37 +1,18 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
+<?php
+require_once "partials/head.php";
+  require_once "partials/navbar.php";
+  
+
+ ?>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/styles.css">
-    <meta name="viewport" content="width=device-width , initial-scale=1">
-    <style>
-      @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,900');
-    </style>
     <title>Preguntas Frecuentes</title>
-  </head> -->
-<?php require_once "partials/head.php";  ?>
-
+  </head>
   <body>
-    <div class="content">
 
       <div class="container">
-
-        <header>
-        <section class="row cabecera cabeza-preg">
-
-          <article class="col-xl-7 col-lg-6 col-md-7 col-sm-12 col-xs-12 logo-tit">
-            <img class="imagen imagen-cab" width="50%" src="imagenes/logo-final1.png" alt="Dogers logo">
-          </article>
-
-        </section>
-        </header>
-
-        <div class="col-xl-12 color">
-          <br>
-        </div>
-
-        <div class="col-xl-12 preguntas">
 
           <h1 class="pagina-preguntas">Preguntas frecuentes</h1>
 
@@ -63,28 +44,10 @@
 
             <h2 class="advertencia">Recordá que en Dogers no está permitido comprar o vender mascotas.</h2>
 
-        </div>
-
-        <div class="col-xl-12 bg-white">
-          <br>
-        </div>
-<?php require_once "partials/footer.php";  ?>
-        <!-- <footer class="row bg-pie ">
-
-          <section class= "col-xl-12 pie-pag">
-            <a class="pie"href="#">Registrate</a>
-            <a class="pie"href="#">Inicia Sesion</a>
-            <a class="pie"href="#">Preguntas Frecuentes</a>
-            <a class="pie"href="#">Terminos y Condiciones</a>
-          </section>
-
-        </footer> -->
-        <div class="col-xl-12 bg-white">
-          <br>
-        </div>
 
   </body>
       </div>
-    </div>
+
 
 </html>
+<?php require_once "partials/footer.php"; ?>
