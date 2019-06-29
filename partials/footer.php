@@ -9,12 +9,12 @@
           <p>Dogers © 2019. Todos los derechos reservados</p>
           <br>
         </div>
-        <div class="col-md-1 col-sm-2">
+        <!-- <div class="col-md-1 col-sm-2">
           <h6><a href="index.php">Registrarte</a></h6>
         </div>
         <div class="col-md-1 col-sm-2">
           <h6><a href="login.php">Ingresar</a></h6>
-        </div>
+        </div> -->
         <div class="col-md-1 col-sm-1">
           <h6><a href="newsfeed.php">Inicio</a></h6>
         </div>

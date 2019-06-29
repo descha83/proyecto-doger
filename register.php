@@ -2,6 +2,7 @@
 	// Incluimos el controlador del registro-login
 	// De esta manera tengo el scope a la funciones que necesito
 	require_once 'register-login-controller.php';
+
 	// Si está logueda la persona la redirijo al profile
 	if ( isLogged() ) {
 		header('location: profile.php');
@@ -273,9 +274,10 @@
 			// Guardo al usuario en el archivo JSON, y me devuelve al usuario que guardó en array
 			$theUser = saveUser();
 			// Al momento en que se registar vamos a mantener la sesión abierta
-			setcookie('userLoged', $theUser['email'], time() + 3000);
+			// setcookie('userLoged', $theUser['email'], time() + 3000);
 			// Logueo al usuario
-			login($theUser);
+			// login($theUser);
+			header('location: login.php');
 		}
 	}
 

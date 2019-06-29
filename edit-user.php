@@ -2,6 +2,7 @@
 $pageTitle = "Editar usuario";
 require_once "edit.php";
 require_once "partials/head.php";
+require_once 'conexion.php';
 
 // uso la funcion getUserByEmail con el email del usuario logueado en sesion
  	$userToEdit = getUserByEmail($_SESSION['userLoged']["email"]);
