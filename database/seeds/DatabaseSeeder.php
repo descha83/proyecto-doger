@@ -11,6 +11,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+      $users = factory(App\User::class)->times(5)->create();
+			$posts = factory(App\Post::class)->times(10)->create();
+
+      factory(App\User::class, 20)->create();
+
+              foreach(App\User::all() as $users) {
+
+                  foreach(App\Post::all() as $posts) {
+
+                      if (rand(1, 100) > 100) {
+                              $users->posts()->save($posts->id);
+                      }
+                  }
+                  $users->save();
+              }
+          }
     }
-}

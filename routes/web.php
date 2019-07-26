@@ -11,20 +11,31 @@
 |
 */
 
-Route::get('/', function (){
-  return view('auth.register');
+Route::get('/', function () {
+    return view('auth.register');
 });
-
-Route::post('/', function (){
-  return view('auth.login');
+Route::post('/', function () {
+    return view('auth.login');
+});
+Route::get('/login', function () {
+    return view('auth.login');
+});
+Route::get('/newsfeed', function () {
+    return view('auth.newsfeed');
+});
+Route::get('/fq', function () {
+    return view('fq');
+});
+Route::get('/profile', function () {
+    return view('sprofile');
+});
+Route::get('/edit-profile', function () {
+    return view('edit-profile');
+});
+Route::get('/logout', function () {
+    return view('auth.register');
 });
 
 Auth::routes();
-
-Route::get('/', 'HomeController@index')->name('register');
-
-Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('/newsfeed', 'HomeController@newsfeed');
+Route::resource('Post', 'posteosController');

@@ -52,9 +52,9 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'country' => ['required', 'string', 'max:255'],
+            //'country' => ['required', 'string', 'max:255'],
             'avatar' => ['required', 'image'],
-            'password' => ['required', 'string', 'min:8', 'confirmed', 'regex:/DH/'],
+            'password' => ['required', 'string', 'min:5', 'confirmed', 'regex:/DH/'],
           ], [
             'required' => 'El campo :attribute es obligatorio',
             'password.regex' => 'La contraseña debe tener las letras DH'
