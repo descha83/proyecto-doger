@@ -1,11 +1,10 @@
-@extends('front.template')
+@extends('template')
 
 @section('pageTitle', '| Ponete al día con la comunidad')
 
 @section('mainContent')
 
-@section('navbar')  
-
+@include('includes.navbar')
 
 <body>
  <div class="container">
@@ -18,12 +17,12 @@
          <div class="row">
            <div class="col-md-3">
              <div class="profile-info">
-               <img src="data/avatars/" alt="imagen usuario" class="img-responsive profile-photo" />
+               <img src="/storage/avatars/{{ Auth::user()->avatar }}" alt="imagen usuario" class="img-responsive profile-photo" />
              </div>
            </div>
            <div class="col-md-3">
              <ul class="list-inline">
-               <li><h3></h3>
+               <li><h3>{{ Auth::user()->name }}</h3>
                <p class="text-muted"></p></li>
              </ul>
            </div>
@@ -257,6 +256,6 @@
      </div>
    </div>
  </div>
-@endsection
 
-@section('footer')
+@include('includes.footer')
+@endsection

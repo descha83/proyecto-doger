@@ -13,10 +13,14 @@ class AddUserIdToPosts extends Migration
      */
      public function up()
      {
+
          Schema::table('posts', function (Blueprint $table) {
-           $table->unsignedBigInteger('user_id')->nullable();
-           $table->foreign('user_id')->references('id')->on('posts');
+           $table->unsignedBigInteger('user_id');
          });
+         Schema::table('posts', function($table) {
+           $table->foreign('user_id')->references('id')->on('users');
+  });
+
      }
 
      /**
